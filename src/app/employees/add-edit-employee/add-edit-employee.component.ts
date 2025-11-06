@@ -14,6 +14,9 @@ export class AddEditEmployeeComponent implements OnInit {
   isEditMode = false;
   employeeId: number | null = null;
 
+  departmentOptions: string[] = ['IT', 'HR', 'Finance', 'Marketing', 'SQA'];
+  skillOptions: string[] = ['Angular', 'React', 'Vue', 'Node.js', 'Python', 'Java'];
+
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeService,
@@ -72,28 +75,32 @@ export class AddEditEmployeeComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.employeeForm.valid) {
-      let employee: Employee = this.employeeForm.value;
-      if (!this.isEditMode) {
-        // Ensure a numeric ID is assigned for new employees
+   onSubmit(): void {
+    if (!this.employeeForm.valid) {
+      this.markFormGroupTouched(this.employeeForm);
+      return;
+    }
+
+    let employee: Employee = this.employeeForm.value;
+
+    if (this.isEditMode && this.employeeId) {
+      // Edit mode
+      this.employeeService.updateEmployee(this.employeeId, employee).subscribe(() => {
+        this.router.navigate(['/employees']);
+      });
+    } else {
+      // Add mode
+      this.employeeService.getEmployees().subscribe(allEmployees => {
+        // Assign serial ID based on current list length
         employee = {
           ...employee,
-          id: Date.now() // Use timestamp as a unique numeric ID
+          id: allEmployees.length + 1
         };
-      }
-      if (this.isEditMode && this.employeeId) {
-        this.employeeService.updateEmployee(this.employeeId, employee).subscribe(() => {
-          this.router.navigate(['/employees']);
-        });
-      } else {
+
         this.employeeService.addEmployee(employee).subscribe(() => {
-          // Always go to the list after adding, never to details
           this.router.navigate(['/employees']);
         });
-      }
-    } else {
-      this.markFormGroupTouched(this.employeeForm);
+      });
     }
   }
 

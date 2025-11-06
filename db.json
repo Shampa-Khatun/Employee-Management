@@ -1,6 +1,7 @@
 {
   "employees": [
     {
+      "id": "1",
       "name": "John Doe",
       "email": "john@example.com",
       "department": "Finance",
@@ -9,8 +10,7 @@
       "skills": [
         "Angular",
         "Node.js"
-      ],
-      "id": "1"
+      ]
     },
     {
       "id": "2",
@@ -146,14 +146,63 @@
       ]
     },
     {
-      "id": 1762420750932,
-      "name": "Shampa Khatun",
+      "id": "13",
+      "name": "William Moore",
+      "email": "william@example.com",
+      "department": "IT",
+      "role": "Support Engineer",
+      "address": "369 Fir St",
+      "skills": [
+        "Troubleshooting",
+        "Networking"
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Mia Jackson",
+      "email": "mia@example.com",
+      "department": "Marketing",
+      "role": "Executive",
+      "address": "741 Aspen St",
+      "skills": [
+        "Social Media",
+        "Email Marketing"
+      ]
+    },
+    {
+      "id": "15",
+      "name": "Alexander White",
+      "email": "alexander@example.com",
+      "department": "Finance",
+      "role": "Clerk",
+      "address": "963 Pinecone St",
+      "skills": [
+        "Accounting",
+        "MS Office"
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Shampa",
       "email": "shampacseruet@gmail.com",
       "department": "IT",
       "role": "Developer",
       "address": "Dhaka",
       "skills": [
         "Angular"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "sh",
+      "email": "shampacseruet@gmail.com",
+      "department": "SQA",
+      "role": "Developer",
+      "address": "Dhaka",
+      "skills": [
+        "React",
+        "Angular",
+        "Python"
       ]
     }
   ]

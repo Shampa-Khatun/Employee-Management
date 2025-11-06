@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <h2 class="mb-0">Employee Details</h2>
+    <div>
+      <button class="btn btn-light me-2" (click)="editEmployee()" *ngIf="employee">
+        <i class="bi bi-pencil me-1"></i>Edit
+      </button>
+      <button class="btn btn-light" (click)="goBack()">
+        <i class="bi bi-arrow-left me-1"></i>Back
+      </button>
+    </div>
+  </div>
+  <div class="card-body" *ngIf="employee">
+    <div class="row">
+      <div class="col-md-6">
+        <dl class="row">
+          <dt class="col-sm-4">Name:</dt>
+          <dd class="col-sm-8">{{employee.name}}</dd>
+
+          <dt class="col-sm-4">Email:</dt>
+          <dd class="col-sm-8">{{employee.email}}</dd>
+
+          <dt class="col-sm-4">Department:</dt>
+          <dd class="col-sm-8">
+            <span class="badge bg-info">{{employee.department}}</span>
+          </dd>
+
+          <dt class="col-sm-4">Role:</dt>
+          <dd class="col-sm-8">
+            <span class="badge bg-secondary">{{employee.role}}</span>
+          </dd>
+        </dl>
+      </div>
+      <div class="col-md-6">
+        <dl class="row">
+          <dt class="col-sm-4">Address:</dt>
+          <dd class="col-sm-8">{{employee.address}}</dd>
+
+          <dt class="col-sm-4">Skills:</dt>
+          <dd class="col-sm-8">
+            <span class="badge bg-primary me-1" *ngFor="let skill of employee.skills">
+              {{skill}}
+            </span>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="card-body text-center" *ngIf="!employee">
+    <div class="alert alert-danger mt-4">
+      <h4 class="alert-heading">Employee Not Found</h4>
+      <p>The employee you are looking for does not exist.</p>
+      <button class="btn btn-primary" (click)="goBack()">Back to List</button>
+    </div>
+  </div>
+</div>

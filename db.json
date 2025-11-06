@@ -1,0 +1,160 @@
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "department": "Finance",
+      "role": "Developer",
+      "address": "123 Main St",
+      "skills": [
+        "Angular",
+        "Node.js"
+      ],
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "department": "HR",
+      "role": "Manager",
+      "address": "456 Oak St",
+      "skills": [
+        "Recruitment",
+        "Communication"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Robert Brown",
+      "email": "robert@example.com",
+      "department": "Finance",
+      "role": "Accountant",
+      "address": "789 Pine St",
+      "skills": [
+        "Excel",
+        "QuickBooks"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Emily Davis",
+      "email": "emily@example.com",
+      "department": "Marketing",
+      "role": "Executive",
+      "address": "321 Elm St",
+      "skills": [
+        "SEO",
+        "Content Writing"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Michael Johnson",
+      "email": "michael@example.com",
+      "department": "IT",
+      "role": "Tester",
+      "address": "654 Maple St",
+      "skills": [
+        "Selenium",
+        "Manual Testing"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Sarah Wilson",
+      "email": "sarah@example.com",
+      "department": "Sales",
+      "role": "Representative",
+      "address": "987 Cedar St",
+      "skills": [
+        "Negotiation",
+        "CRM"
+      ]
+    },
+    {
+      "id": "7",
+      "name": "David Lee",
+      "email": "david@example.com",
+      "department": "IT",
+      "role": "Developer",
+      "address": "159 Birch St",
+      "skills": [
+        "React",
+        "Node.js"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Laura Taylor",
+      "email": "laura@example.com",
+      "department": "Finance",
+      "role": "Analyst",
+      "address": "753 Spruce St",
+      "skills": [
+        "Excel",
+        "Financial Modeling"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "James Anderson",
+      "email": "james@example.com",
+      "department": "Marketing",
+      "role": "Designer",
+      "address": "852 Walnut St",
+      "skills": [
+        "Photoshop",
+        "Illustrator"
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Olivia Martinez",
+      "email": "olivia@example.com",
+      "department": "HR",
+      "role": "Coordinator",
+      "address": "951 Chestnut St",
+      "skills": [
+        "Onboarding",
+        "Employee Relations"
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Daniel Thomas",
+      "email": "daniel@example.com",
+      "department": "IT",
+      "role": "DevOps Engineer",
+      "address": "147 Willow St",
+      "skills": [
+        "AWS",
+        "Docker",
+        "Kubernetes"
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Sophia Hernandez",
+      "email": "sophia@example.com",
+      "department": "Sales",
+      "role": "Manager",
+      "address": "258 Poplar St",
+      "skills": [
+        "CRM",
+        "Lead Generation"
+      ]
+    },
+    {
+      "id": 1762420750932,
+      "name": "Shampa Khatun",
+      "email": "shampacseruet@gmail.com",
+      "department": "IT",
+      "role": "Developer",
+      "address": "Dhaka",
+      "skills": [
+        "Angular"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+.card { margin-bottom: 1rem; }
+.invalid-feedback { display: block; }
+.input-group .btn { border-top-left-radius: 0; border-bottom-left-radius: 0; }

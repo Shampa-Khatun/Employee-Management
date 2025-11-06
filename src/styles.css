@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+body {
+  background-color: #f8f9fa;
+}
+
+.card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+.table th {
+  border-top: none;
+  background-color: #f8f9fa;
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.5em 0.75em;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+}
+
+.table-responsive {
+  border-radius: 0.25rem;
+}
+
+/* Animation for table rows */
+.table tbody tr {
+  transition: all 0.2s ease-in-out;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(37, 22, 30, 0.05) !important;
+}

@@ -15,7 +15,7 @@ export class AddEditEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
   isEditMode = false;
   employeeId: number | null = null;
-  successMessage: string | null = null;
+  Message: string | null = null;
 
 
   departmentOptions:string[] = DEPARTMENT_OPTIONS;
@@ -28,7 +28,7 @@ export class AddEditEmployeeComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.employeeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       department: ['', Validators.required],
       role: ['', Validators.required],
@@ -60,8 +60,9 @@ export class AddEditEmployeeComponent implements OnInit {
     this.skills.removeAt(index);
   }
 
-  private loadEmployee(id: number): void {
-    this.employeeService.getEmployee(id).subscribe(employee => {
+private loadEmployee(id: number): void {
+  this.employeeService.getEmployee(id).subscribe({
+    next: (employee) => {
       this.employeeForm.patchValue({
         name: employee.name,
         email: employee.email,
@@ -69,31 +70,40 @@ export class AddEditEmployeeComponent implements OnInit {
         role: employee.role,
         address: employee.address
       });
-      
+
       // Clear existing skills and add new ones
       while (this.skills.length) {
         this.skills.removeAt(0);
       }
-      
+
       employee.skills.forEach(skill => {
         this.skills.push(this.fb.control(skill, Validators.required));
       });
-    });
-  }
-
+    },
+    error: () => {
+      this.Message = 'Employee not found. Redirecting...';
+      setTimeout(() => {
+        this.router.navigate(['/employees']);
+      }, 500);
+    }
+  });
+}
    onSubmit(): void {
+    this.Message = null;
     if (!this.employeeForm.valid) {
       this.markFormGroupTouched(this.employeeForm);
+       this.Message = 'Required fields are still empty!';
       return;
     }
 
-    let employee: Employee = this.employeeForm.value;
+    const employee: Employee = this.employeeForm.value;
 
     if (this.isEditMode && this.employeeId) {
+
       // Edit mode
       this.employeeService.updateEmployee(this.employeeId, employee).subscribe(() => {
         //alert('Are you want to update these info?');
-        this.successMessage = 'Employee Updated Successfully!';
+        this.Message = 'Employee Updated Successfully!';
         setTimeout(()=> {
         this.router.navigate(['/employees']);},1500);
       });
@@ -106,7 +116,7 @@ export class AddEditEmployeeComponent implements OnInit {
 ;
         this.employeeService.addEmployee(employee).subscribe(() => {
           //alert('Are you want to add this employee?');
-          this.successMessage = 'Employee added successfully!';
+          this.Message = 'Employee added successfully!';
           setTimeout(()=> {
           this.router.navigate(['/employees']);},1500);
         });

@@ -1,99 +1,181 @@
 <div class="card">
-	<div class="card-header bg-primary text-white">
-		<h2 class="mb-0">{{ isEditMode ? 'Edit' : 'Add' }} Employee</h2>
-	</div>
-	<div *ngIf="successMessage" class="alert alert-success text-center">
-  {{ successMessage }}
-</div>
+  <div class="card-header bg-primary text-white">
+    <h2 class="mb-0">{{ isEditMode ? "Edit" : "Add" }} Employee</h2>
+  </div>
+  <div *ngIf="Message" class="alert alert-success text-center">
+    {{ Message }}
+  </div>
 
-	<div class="card-body">
-		<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-			<div class="row">
-				<div class="col-md-6">
-					<!-- Name -->
-					<div class="mb-3">
-						<label for="name" class="form-label">Name*</label>
-						<input type="text" id="name" class="form-control" formControlName="name"
-									 [class.is-invalid]="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched">
-						<div class="invalid-feedback" *ngIf="employeeForm.get('name')?.touched">
-							<div *ngIf="employeeForm.get('name')?.errors?.['required']">Name is required</div>
-							<div *ngIf="employeeForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters</div>
-						</div>
-					</div>
-
-					<!-- Email -->
-					<div class="mb-3">
-						<label for="email" class="form-label">Email*</label>
-						<input type="email" id="email" class="form-control" formControlName="email"
-									 [class.is-invalid]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
-						<div class="invalid-feedback" *ngIf="employeeForm.get('email')?.touched">
-							<div *ngIf="employeeForm.get('email')?.errors?.['required']">Email is required</div>
-							<div *ngIf="employeeForm.get('email')?.errors?.['email']">Enter a valid email</div>
-						</div>
-					</div>
-
-					<!-- Department -->
-                <div class="mb-3">
-                    <label class="form-label">Department*</label>
-                    <select class="form-select" formControlName="department"
-                            [class.is-invalid]="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
-                    <option value="">Select Department</option>
-                    <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
-                    </select>
-                    <div class="invalid-feedback">Department is required</div>
+  <div class="card-body">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name*</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              formControlName="name"
+              [class.is-invalid]="
+                employeeForm.get('name')?.invalid &&
+                employeeForm.get('name')?.touched
+              "
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="employeeForm.get('name')?.touched"
+            >
+              <div
+                *ngIf="
+                  employeeForm.get('name')?.invalid &&
+                  employeeForm.get('name')?.touched
+                "
+                class="invalid-feedback d-block"
+              >
+                <div *ngIf="employeeForm.get('name')?.errors?.['required']">
+                  Name is required
                 </div>
+                <div *ngIf="employeeForm.get('name')?.errors?.['minlength']">
+                  Name must be at least 3 characters
                 </div>
+              </div>
+            </div>
+          </div>
 
-				<div class="col-md-6">
-					<!-- Role -->
-					<div class="mb-3">
-						<label for="role" class="form-label">Role*</label>
-						<input type="text" id="role" class="form-control" formControlName="role"
-									 [class.is-invalid]="employeeForm.get('role')?.invalid && employeeForm.get('role')?.touched">
-						<div class="invalid-feedback">Role is required</div>
-					</div>
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email*</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+              [class.is-invalid]="
+                employeeForm.get('email')?.invalid &&
+                employeeForm.get('email')?.touched
+              "
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="employeeForm.get('email')?.touched"
+            >
+              <div *ngIf="employeeForm.get('email')?.errors?.['required']">
+                Email is required
+              </div>
+              <div *ngIf="employeeForm.get('email')?.errors?.['email']">
+                Enter a valid email
+              </div>
+            </div>
+          </div>
 
-					<!-- Address -->
-					<div class="mb-3">
-						<label for="address" class="form-label">Address*</label>
-						<textarea id="address" rows="3" class="form-control" formControlName="address"
-											[class.is-invalid]="employeeForm.get('address')?.invalid && employeeForm.get('address')?.touched"></textarea>
-					</div>
-				</div>
-			</div>
+          <!-- Department -->
+          <div class="mb-3">
+            <label class="form-label">Department*</label>
+            <select
+              class="form-select"
+              formControlName="department"
+              [class.is-invalid]="
+                employeeForm.get('department')?.invalid &&
+                employeeForm.get('department')?.touched
+              "
+            >
+              <option value="">Select Department</option>
+              <option *ngFor="let dept of departmentOptions" [value]="dept">
+                {{ dept }}
+              </option>
+            </select>
+            <div class="invalid-feedback">Department is required</div>
+          </div>
+        </div>
 
-			<!-- Skills -->
-        <div class="mb-3">
-            <label class="form-label">Skills</label>
-            <div class="mb-2">
-            <button type="button" class="btn btn-outline-primary btn-sm" (click)="addSkill()">
-                <i class="bi bi-plus-circle me-1"></i>Add Skill
+        <div class="col-md-6">
+          <!-- Role -->
+          <div class="mb-3">
+            <label for="role" class="form-label">Role*</label>
+            <input
+              type="text"
+              id="role"
+              class="form-control"
+              formControlName="role"
+              [class.is-invalid]="
+                employeeForm.get('role')?.invalid &&
+                employeeForm.get('role')?.touched
+              "
+            />
+            <div class="invalid-feedback">Role is required</div>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-3">
+            <label for="address" class="form-label">Address*</label>
+            <textarea
+              id="address"
+              rows="3"
+              class="form-control"
+              formControlName="address"
+              [class.is-invalid]="
+                employeeForm.get('address')?.invalid &&
+                employeeForm.get('address')?.touched
+              "
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="mb-3">
+        <label class="form-label">Skills</label>
+        <div class="mb-2">
+          <button
+            type="button"
+            class="btn btn-outline-primary btn-sm"
+            (click)="addSkill()"
+          >
+            <i class="bi bi-plus-circle me-1"></i>Add Skill
+          </button>
+        </div>
+        <div formArrayName="skills">
+          <div
+            class="input-group mb-2"
+            *ngFor="let skillControl of skills.controls; let i = index"
+          >
+            <select
+              [formControlName]="i"
+              class="form-select"
+              [class.is-invalid]="skillControl.invalid && skillControl.touched"
+            >
+              <option value="">Select Skill</option>
+              <option *ngFor="let skill of skillOptions" [value]="skill">
+                {{ skill }}
+              </option>
+            </select>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              (click)="removeSkill(i)"
+            >
+              <i class="bi bi-trash"></i>
             </button>
-            </div>
-            <div formArrayName="skills">
-            <div class="input-group mb-2" *ngFor="let skillControl of skills.controls; let i = index">
-                <select [formControlName]="i" class="form-select"
-                        [class.is-invalid]="skillControl.invalid && skillControl.touched">
-                <option value="">Select Skill</option>
-                <option *ngFor="let skill of skillOptions" [value]="skill">{{ skill }}</option>
-                </select>
-                <button type="button" class="btn btn-outline-danger" (click)="removeSkill(i)">
-                <i class="bi bi-trash"></i>
-                </button>
-                <div class="invalid-feedback">Skill is required</div>
-            </div>
-            </div>
+            <div class="invalid-feedback">Skill is required</div>
+          </div>
         </div>
+      </div>
 
-		        <!--  Show error if no skill selected -->
-        <div *ngIf="skills.invalid && skills.touched" class="text-danger">
-          At least one skill is required.
-        </div>
+      <!--  Show error if no skill selected -->
+      <div *ngIf="skills.invalid && skills.touched" class="text-danger">
+        At least one skill is required.
+      </div>
 
-			<div class="d-flex gap-2">
-				<button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Add' }} Employee</button>
-				<button type="button" class="btn btn-secondary" routerLink="/employees">Cancel</button>
-			</div>
-		</form>
-	</div>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">
+          {{ isEditMode ? "Update" : "Add" }} Employee
+        </button>
+        <button type="button" class="btn btn-secondary" routerLink="/employees">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

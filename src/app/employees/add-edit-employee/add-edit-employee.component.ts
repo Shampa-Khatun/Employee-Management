@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee.model';
+import { DEPARTMENT_OPTIONS } from 'src/app/shared/constants';
+import { SKILL_OPTIONS } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-add-edit-employee',
@@ -13,9 +15,11 @@ export class AddEditEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
   isEditMode = false;
   employeeId: number | null = null;
+  successMessage: string | null = null;
 
-  departmentOptions: string[] = ['IT', 'HR', 'Finance', 'Marketing', 'SQA'];
-  skillOptions: string[] = ['Angular', 'React', 'Vue', 'Node.js', 'Python', 'Java'];
+
+  departmentOptions:string[] = DEPARTMENT_OPTIONS;
+  skillOptions: string[] = SKILL_OPTIONS;
 
   constructor(
     private fb: FormBuilder,
@@ -28,8 +32,8 @@ export class AddEditEmployeeComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       department: ['', Validators.required],
       role: ['', Validators.required],
-      address: ['', Validators.required],
-      skills: this.fb.array([])
+      address: [''],
+      skills: this.fb.array([], Validators.required)
     });
   }
 
@@ -39,6 +43,8 @@ export class AddEditEmployeeComponent implements OnInit {
       this.isEditMode = true;
       this.employeeId = +id;
       this.loadEmployee(this.employeeId);
+    } else {
+      this.addSkill();
     }
   }
 
@@ -86,23 +92,26 @@ export class AddEditEmployeeComponent implements OnInit {
     if (this.isEditMode && this.employeeId) {
       // Edit mode
       this.employeeService.updateEmployee(this.employeeId, employee).subscribe(() => {
-        this.router.navigate(['/employees']);
+        //alert('Are you want to update these info?');
+        this.successMessage = 'Employee Updated Successfully!';
+        setTimeout(()=> {
+        this.router.navigate(['/employees']);},1500);
       });
     } else {
-      // Add mode
-      this.employeeService.getEmployees().subscribe(allEmployees => {
-        // Assign serial ID based on current list length
-        employee = {
-          ...employee,
-          id: allEmployees.length + 1
-        };
-
+      // this.employeeService.getEmployees().subscribe(allEmployees => {
+      //   employee = {
+      //     ...employee,
+      //     id: allEmployees.length + 1
+      //   };
+;
         this.employeeService.addEmployee(employee).subscribe(() => {
-          this.router.navigate(['/employees']);
+          //alert('Are you want to add this employee?');
+          this.successMessage = 'Employee added successfully!';
+          setTimeout(()=> {
+          this.router.navigate(['/employees']);},1500);
         });
-      });
+      };
     }
-  }
 
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {

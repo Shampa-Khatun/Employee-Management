@@ -158,51 +158,14 @@
       ]
     },
     {
-      "id": "14",
-      "name": "Mia Jackson",
-      "email": "mia@example.com",
-      "department": "Marketing",
-      "role": "Executive",
-      "address": "741 Aspen St",
-      "skills": [
-        "Social Media",
-        "Email Marketing"
-      ]
-    },
-    {
-      "id": "15",
-      "name": "Alexander White",
-      "email": "alexander@example.com",
-      "department": "Finance",
-      "role": "Clerk",
-      "address": "963 Pinecone St",
-      "skills": [
-        "Accounting",
-        "MS Office"
-      ]
-    },
-    {
-      "id": "17",
-      "name": "Shampa",
+      "id": "a3eb",
+      "name": "Shampa Khatun",
       "email": "shampacseruet@gmail.com",
       "department": "IT",
       "role": "Developer",
       "address": "Dhaka",
       "skills": [
         "Angular"
-      ]
-    },
-    {
-      "id": 17,
-      "name": "sh",
-      "email": "shampacseruet@gmail.com",
-      "department": "SQA",
-      "role": "Developer",
-      "address": "Dhaka",
-      "skills": [
-        "React",
-        "Angular",
-        "Python"
       ]
     }
   ]

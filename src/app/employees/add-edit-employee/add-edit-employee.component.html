@@ -2,6 +2,10 @@
 	<div class="card-header bg-primary text-white">
 		<h2 class="mb-0">{{ isEditMode ? 'Edit' : 'Add' }} Employee</h2>
 	</div>
+	<div *ngIf="successMessage" class="alert alert-success text-center">
+  {{ successMessage }}
+</div>
+
 	<div class="card-body">
 		<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
 			<div class="row">
@@ -54,7 +58,6 @@
 						<label for="address" class="form-label">Address*</label>
 						<textarea id="address" rows="3" class="form-control" formControlName="address"
 											[class.is-invalid]="employeeForm.get('address')?.invalid && employeeForm.get('address')?.touched"></textarea>
-						<div class="invalid-feedback">Address is required</div>
 					</div>
 				</div>
 			</div>
@@ -80,6 +83,11 @@
                 <div class="invalid-feedback">Skill is required</div>
             </div>
             </div>
+        </div>
+
+		        <!--  Show error if no skill selected -->
+        <div *ngIf="skills.invalid && skills.touched" class="text-danger">
+          At least one skill is required.
         </div>
 
 			<div class="d-flex gap-2">

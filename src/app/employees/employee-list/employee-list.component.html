@@ -1,47 +1,117 @@
 <div class="card">
-  <div class="card-header light-bg text-white d-flex justify-content-between align-items-center">
+  <div
+    class="card-header light-bg text-white d-flex justify-content-between align-items-center"
+  >
     <h2 class="mb-0">Employee List</h2>
     <button class="btn btn-light" (click)="addEmployee()">
       <i class="bi bi-plus-circle me-1"></i>Add Employee
     </button>
   </div>
   <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-hover table-striped">
-        <thead class="table-light">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Department</th>
-            <th>Role</th>
-            <th class="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let emp of employees">
-            <td>{{ emp.name }}</td>
-            <td>{{ emp.email }}</td>
-            <td><span class="badge bg-info">{{ emp.department }}</span></td>
-            <td><span class="badge bg-secondary">{{ emp.role }}</span></td>
-            <td class="text-center">
-              <button class="btn btn-outline-info btn-sm me-1" (click)="viewEmployee(emp.id!)">
-                <i class="bi bi-eye"></i>
-              </button>
-              <button class="btn btn-outline-warning btn-sm me-1" (click)="editEmployee(emp.id!)">
-                <i class="bi bi-pencil"></i>
-              </button>
-              <button class="btn btn-outline-danger btn-sm" (click)="deleteEmployee(emp.id!)">
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr *ngIf="employees.length === 0">
-            <td colspan="5" class="text-center py-4">
-              No employees found. Click "Add Employee" to add one.
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <form [formGroup]="filterForm" class="row mb-3">
+      <!-- Search by Name/Email -->
+      <div class="col-md-4 mb-2">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by name or email"
+          formControlName="searchTerm"
+        />
+      </div>
+
+      <!-- Filter by Department -->
+      <div class="col-md-4 mb-2">
+        <select class="form-select" formControlName="selectedDepartment">
+          <option value="">All Departments</option>
+          <option *ngFor="let dept of departmentOptions" [value]="dept">
+            {{ dept }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Filter by Role -->
+      <div class="col-md-4 mb-2">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Filter by role"
+          formControlName="selectedRole"
+        />
+      </div>
+    </form>
+    <button
+      *ngIf="isFiltered"
+      class="btn btn-secondary ms-2"
+      (click)="resetFilters()"
+    >
+      Back to Main List
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Role</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let emp of filteredEmployees
+              | paginate
+                : { itemsPerPage: itemsPerPage, currentPage: currentPage }
+          "
+        >
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>
+            <span class="badge bg-info">{{ emp.department }}</span>
+          </td>
+          <td>
+            <span class="badge bg-secondary">{{ emp.role }}</span>
+          </td>
+          <td class="text-center">
+            <button
+              class="btn btn-outline-info btn-sm me-1"
+              (click)="viewEmployee(emp.id!)"
+            >
+              <i class="bi bi-eye"></i>
+            </button>
+            <button
+              class="btn btn-outline-warning btn-sm me-1"
+              (click)="editEmployee(emp.id!)"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="deleteEmployee(emp.id!)"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredEmployees.length === 0">
+          <td colspan="5" class="text-center py-4">
+            No employees found. Click "Add Employee" to add one.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination controls -->
+    <pagination-controls
+      (pageChange)="onPageChange($event)"
+      [autoHide]="true"
+      [maxSize]="3"
+      previousLabel="&laquo;"
+      nextLabel="&raquo;"
+    >
+    </pagination-controls>
   </div>
 </div>

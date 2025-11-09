@@ -9,7 +9,7 @@ import { SKILL_OPTIONS } from 'src/app/shared/constants';
 @Component({
   selector: 'app-add-edit-employee',
   templateUrl: './add-edit-employee.component.html',
-  styleUrls: ['./add-edit-employee.component.css']
+  styleUrls: ['./add-edit-employee.component.css'],
 })
 export class AddEditEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
@@ -17,8 +17,7 @@ export class AddEditEmployeeComponent implements OnInit {
   employeeId: number | null = null;
   Message: string | null = null;
 
-
-  departmentOptions:string[] = DEPARTMENT_OPTIONS;
+  departmentOptions: string[] = DEPARTMENT_OPTIONS;
   skillOptions: string[] = SKILL_OPTIONS;
 
   constructor(
@@ -33,7 +32,7 @@ export class AddEditEmployeeComponent implements OnInit {
       department: ['', Validators.required],
       role: ['', Validators.required],
       address: [''],
-      skills: this.fb.array([], Validators.required)
+      skills: this.fb.array([], Validators.required),
     });
   }
 
@@ -60,70 +59,77 @@ export class AddEditEmployeeComponent implements OnInit {
     this.skills.removeAt(index);
   }
 
-private loadEmployee(id: number): void {
-  this.employeeService.getEmployee(id).subscribe({
-    next: (employee) => {
-      this.employeeForm.patchValue({
-        name: employee.name,
-        email: employee.email,
-        department: employee.department,
-        role: employee.role,
-        address: employee.address
-      });
+  private loadEmployee(id: number): void {
+    this.employeeService.getEmployee(id).subscribe({
+      next: (employee) => {
+        this.employeeForm.patchValue({
+          name: employee.name,
+          email: employee.email,
+          department: employee.department,
+          role: employee.role,
+          address: employee.address,
+        });
 
-      // Clear existing skills and add new ones
-      while (this.skills.length) {
-        this.skills.removeAt(0);
-      }
+        // Clear existing skills and add new ones
+        while (this.skills.length) {
+          this.skills.removeAt(0);
+        }
 
-      employee.skills.forEach(skill => {
-        this.skills.push(this.fb.control(skill, Validators.required));
-      });
-    },
-    error: () => {
-      this.Message = 'Employee not found. Redirecting...';
-      setTimeout(() => {
-        this.router.navigate(['/employees']);
-      }, 500);
-    }
-  });
-}
-   onSubmit(): void {
+        employee.skills.forEach((skill) => {
+          this.skills.push(this.fb.control(skill, Validators.required));
+        });
+      },
+      error: () => {
+        this.Message = 'Employee not found. Redirecting...';
+        setTimeout(() => {
+          this.router.navigate(['/employees']);
+        }, 500);
+      },
+    });
+  }
+  onSubmit(): void {
     this.Message = null;
     if (!this.employeeForm.valid) {
       this.markFormGroupTouched(this.employeeForm);
-       this.Message = 'Required fields are still empty!';
+      this.Message = 'Required fields are still empty!';
       return;
     }
 
     let employee: Employee = this.employeeForm.value;
 
     if (this.isEditMode && this.employeeId) {
-
       // Edit mode
-      this.employeeService.updateEmployee(this.employeeId, employee).subscribe(() => {
-        //alert('Are you want to update these info?');
-        this.Message = 'Employee Updated Successfully!';
-        setTimeout(()=> {
-        this.router.navigate(['/employees']);},1500);
-      });
+      this.employeeService
+        .updateEmployee(this.employeeId, employee)
+        .subscribe(() => {
+          //alert('Are you want to update these info?');
+          this.Message = 'Employee Updated Successfully!';
+          setTimeout(() => {
+            this.router.navigate(['/employees']);
+          }, 1500);
+        });
     } else {
-      this.employeeService.getEmployees().subscribe(allEmployees => {
+      this.employeeService.getEmployees().subscribe((allEmployees) => {
+        const maxId =
+          allEmployees.length > 0
+            ? Math.max(...allEmployees.map((e) => e.id))
+            : 0;
         employee = {
           ...employee,
-          id: allEmployees.length + 1
+          id: maxId + 1,
         };
         this.employeeService.addEmployee(employee).subscribe(() => {
           //alert('Are you want to add this employee?');
           this.Message = 'Employee added successfully!';
-          setTimeout(()=> {
-          this.router.navigate(['/employees']);},1500);
+          setTimeout(() => {
+            this.router.navigate(['/employees']);
+          }, 1500);
         });
       });
     }
   }
   private markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
+    Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
       if (control instanceof FormGroup) {
         this.markFormGroupTouched(control);

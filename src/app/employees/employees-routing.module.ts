@@ -5,10 +5,10 @@ import { AddEditEmployeeComponent } from './add-edit-employee/add-edit-employee.
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 const routes: Routes = [
-  { path: '', component: EmployeeListComponent },                    // /employees
+  { path: 'employees', component: EmployeeListComponent },                    // /employees
   { path: 'add-employee', component: AddEditEmployeeComponent },     // /employees/add-employee
   { path: 'edit-employee/:id', component: AddEditEmployeeComponent },// /employees/edit-employee/:id
-  { path: ':id', component: EmployeeDetailsComponent }               // /employees/:id
+  { path: 'employees/:id', component: EmployeeDetailsComponent }               // /employees/:id
 ];
 
 @NgModule({

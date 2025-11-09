@@ -117,11 +117,11 @@ onPageChange(page: number) {
 
 
   addEmployee() {
-    this.router.navigate(['/employees/add-employee']);
+    this.router.navigate(['/add-employee']);
   }
 
   editEmployee(id: number) {
-    this.router.navigate(['/employees/edit-employee', id]);
+    this.router.navigate(['/edit-employee', id]);
   }
 
   viewEmployee(id: number) {

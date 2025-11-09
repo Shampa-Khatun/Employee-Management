@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: '/employees', pathMatch: 'full' },
   { path: '', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },
-  { path: '**', redirectTo: '/employees' } // wildcard route
+  //{ path: '**', redirectTo: '/employees' } 
 ];
 
 @NgModule({

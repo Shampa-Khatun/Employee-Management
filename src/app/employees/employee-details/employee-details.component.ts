@@ -33,7 +33,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
   editEmployee(): void {
     if (this.employee?.id) {
-      this.router.navigate(['/employees/edit-employee', this.employee.id]);
+      this.router.navigate(['/edit-employee', this.employee.id]);
     }
   }
 

@@ -179,6 +179,17 @@
         "Node.js"
       ],
       "id": 16
+    },
+    {
+      "name": "Zuairia",
+      "email": "zuairia@g.com",
+      "department": "HR",
+      "role": "Engineer",
+      "address": "jhllknm,",
+      "skills": [
+        "Angular"
+      ],
+      "id": 17
     }
   ]
 }

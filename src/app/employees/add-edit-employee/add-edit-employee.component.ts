@@ -96,7 +96,7 @@ private loadEmployee(id: number): void {
       return;
     }
 
-    const employee: Employee = this.employeeForm.value;
+    let employee: Employee = this.employeeForm.value;
 
     if (this.isEditMode && this.employeeId) {
 
@@ -108,21 +108,20 @@ private loadEmployee(id: number): void {
         this.router.navigate(['/employees']);},1500);
       });
     } else {
-      // this.employeeService.getEmployees().subscribe(allEmployees => {
-      //   employee = {
-      //     ...employee,
-      //     id: allEmployees.length + 1
-      //   };
-;
+      this.employeeService.getEmployees().subscribe(allEmployees => {
+        employee = {
+          ...employee,
+          id: allEmployees.length + 1
+        };
         this.employeeService.addEmployee(employee).subscribe(() => {
           //alert('Are you want to add this employee?');
           this.Message = 'Employee added successfully!';
           setTimeout(()=> {
           this.router.navigate(['/employees']);},1500);
         });
-      };
+      });
     }
-
+  }
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();

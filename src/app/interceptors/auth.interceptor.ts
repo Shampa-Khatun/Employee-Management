@@ -21,7 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {
-          case 401: alert('Unauthorized'); break;
           case 404: alert('Not Found'); break;
           case 500: alert('Server Error'); break;
           default: alert(`Error: ${error.message}`);

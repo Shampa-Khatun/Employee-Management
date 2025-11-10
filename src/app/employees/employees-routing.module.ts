@@ -6,8 +6,8 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 
 const routes: Routes = [
   { path: 'employees', component: EmployeeListComponent },                    // /employees
-  { path: 'add-employee', component: AddEditEmployeeComponent },     // /employees/add-employee
-  { path: 'edit-employee/:id', component: AddEditEmployeeComponent },// /employees/edit-employee/:id
+  { path: 'add-employee', component: AddEditEmployeeComponent },     // /add-employee
+  { path: 'edit-employee/:id', component: AddEditEmployeeComponent },// /edit-employee/:id
   { path: 'employees/:id', component: EmployeeDetailsComponent }               // /employees/:id
 ];
 

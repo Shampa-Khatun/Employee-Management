@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { LoaderService } from '../shared/loader.service';
 
-@Injectable() // Make sure this is here
+@Injectable() 
+
 export class AuthInterceptor implements HttpInterceptor {
 
   private mockToken = 'Bearer MOCK_TOKEN_12345';

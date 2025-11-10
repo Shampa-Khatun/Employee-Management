@@ -18,6 +18,10 @@ export class EmployeeListComponent implements OnInit {
   filterForm: FormGroup;
   departmentOptions: string[] = DEPARTMENT_OPTIONS;
 
+  sortColumn: string = '';
+sortDirection: 'asc' | 'desc' = 'asc';
+
+
   currentPage = 1;
   itemsPerPage = 10;
 
@@ -41,7 +45,7 @@ export class EmployeeListComponent implements OnInit {
       this.employees = data;
       this.applyFilters();
     });
-
+    
     // Listen to form changes
     this.filterForm.valueChanges.subscribe(() => this.applyFilters());
 
@@ -57,6 +61,24 @@ export class EmployeeListComponent implements OnInit {
     this.currentPage = params['page'] ? +params['page'] : 1;
 
       this.applyFilters(false);  // pass false so page doesn't reset to 1
+    });
+  }
+
+    sort(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    this.filteredEmployees.sort((a, b) => {
+      const valueA = (a as any)[column];
+      const valueB = (b as any)[column];
+
+      if (valueA < valueB) return this.sortDirection === 'asc' ? -1 : 1;
+      if (valueA > valueB) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
     });
   }
 

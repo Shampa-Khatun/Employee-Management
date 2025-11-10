@@ -1,4 +1,13 @@
 .light-bg {
-  background-color: #b097eb;
+  background-color: #4e55be;
   color: white;
+}
+.emp-name {
+  font-weight: bold;
+  color: #5a7eb4; 
+}
+
+.emp-email i {
+  margin-right: 5px; 
+  color: #1890ff;    
 }

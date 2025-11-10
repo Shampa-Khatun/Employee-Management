@@ -8,8 +8,7 @@
       "role": "Engineer",
       "address": "123 Main St",
       "skills": [
-        "Angular",
-        "Node.js"
+        "Angular"
       ]
     },
     {
@@ -170,6 +169,7 @@
       ]
     },
     {
+      "id": 16,
       "name": "Aarav Sharma",
       "email": "aarav.sharma@example.com",
       "department": "IT",
@@ -177,10 +177,10 @@
       "address": "Bangalore, India",
       "skills": [
         "Node.js"
-      ],
-      "id": 16
+      ]
     },
     {
+      "id": 17,
       "name": "Zuairia",
       "email": "zuairia@g.com",
       "department": "HR",
@@ -188,8 +188,7 @@
       "address": "jhllknm,",
       "skills": [
         "Angular"
-      ],
-      "id": 17
+      ]
     }
   ]
 }
